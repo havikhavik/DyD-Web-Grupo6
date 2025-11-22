@@ -1,0 +1,162 @@
+/* Tipografía y colores base */
+:root {
+  --gold: #b79a56;
+  --gold-dark: #9a7f37;
+  --bg-light: #f8f8f6;
+  --marble: #efe8e0;
+  --text-color: #2e2d2a;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  font-family: "Lato", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  color: var(--text-color);
+  background-color: #fff;
+}
+.brand-text {
+  font-family: "Playfair Display", serif;
+  letter-spacing: 0.5px;
+  font-size: 2.05rem;
+}
+.nav-link {
+  font-weight: 500;
+}
+.nav-link.active {
+  color: var(--gold) !important;
+  position: relative;
+}
+.nav-link.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0.15rem;
+  width: 100%;
+  height: 2px;
+  background: var(--gold);
+  border-radius: 2px;
+}
+
+/* Hero */
+.hero {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+}
+.hero {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero-bg {
+  background: url("assets/hero-image.png") center/cover; /* removido no-repeat */
+  position: absolute;
+  inset: 0;
+  filter: brightness(0.75);
+  background-size: auto;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+.hero-content {
+  min-height: 60vh;
+}
+.hero-content {
+  min-height: 60vh;
+  position: relative;
+  z-index: 2;
+}
+.btn-gold {
+  background: var(--gold);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+}
+.btn-gold:hover,
+.btn-gold:focus {
+  background: var(--gold-dark);
+  color: #fff;
+}
+.fade-in {
+  animation: fade 0.9s ease-out both;
+}
+@keyframes fade {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Welcome section */
+.section-welcome {
+  background: var(--marble);
+  background-image: url("../img/marble-texture.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.video-wrapper iframe {
+  border: 0;
+}
+
+/* Feature buttons */
+.feature-btn {
+  width: 160px;
+  height: 160px;
+  background: #fff;
+  border: 2px solid var(--gold);
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-color);
+  font-weight: 500;
+  transition: 0.25s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+.feature-btn:focus,
+.feature-btn:hover {
+  background: var(--gold);
+  color: #fff;
+  text-decoration: none;
+}
+.feature-icon {
+  font-size: 2rem;
+  line-height: 1;
+}
+.feature-text {
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* A11y: foco visible */
+.user-is-tabbing a:focus,
+.user-is-tabbing button:focus {
+  outline: 3px solid var(--gold-dark);
+  outline-offset: 3px;
+}
+
+/* Footer */
+footer {
+  font-size: 0.85rem;
+}
+
+/* Responsive tweaks */
+@media (min-width: 992px) {
+  .hero {
+    min-height: 72vh;
+  }
+  .hero-content {
+    min-height: 72vh;
+  }
+}
