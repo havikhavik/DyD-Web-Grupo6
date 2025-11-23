@@ -99,10 +99,34 @@ body {
 
 /* Welcome section */
 .section-welcome {
-  background: var(--marble);
-  background-image: url("../img/marble-texture.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
+  /* Fallback color */
+  background-color: var(--marble);
+  /* Capa 1: gradiente translúcido para aclarar la imagen
+     Capa 2: imagen mármol original */
+  background: linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0)),
+    url("assets/background-marmol.png") center/cover no-repeat;
+}
+.section-welcome {
+  position: relative;
+  background-color: var(
+    --marble
+  ); /* color base detrás por si falla la imagen */
+  overflow: hidden;
+}
+.section-welcome::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("assets/background-marmol.png") center/cover no-repeat;
+  /* Filtros para bajar contraste y saturación y aclarar ligeramente */
+  filter: brightness(1.12) contrast(0.88) saturate(0.65);
+  opacity: 0.55; /* controla cuánta textura se percibe */
+  z-index: 0;
+}
+.section-welcome > * {
+  /* asegura que el contenido quede encima del pseudo-elemento */
+  position: relative;
+  z-index: 1;
 }
 .video-wrapper iframe {
   border: 0;
@@ -159,4 +183,192 @@ footer {
   .hero-content {
     min-height: 72vh;
   }
+}
+
+/* Sección planifica: fondo menos contrastado que blanco puro */
+.planifica-section {
+  position: relative;
+  /* Gradiente cálido que deriva del mármol superior para una transición suave */
+  background: linear-gradient(to bottom, #efe8e0 0%, #f7f5f1 55%, #fbfaf7 100%);
+  border-top: 1px solid rgba(183, 154, 86, 0.25); /* sutil separación sin corte brusco */
+}
+.planifica-section::before {
+  /* Suave desvanecido que reduce todavía más el contraste en el borde superior */
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 28px;
+  background: linear-gradient(
+    to bottom,
+    rgba(239, 232, 224, 0.75),
+    rgba(239, 232, 224, 0)
+  );
+  pointer-events: none;
+}
+
+/* ---------------- Servicios ---------------- */
+.services-wrapper {
+  background: var(--marble);
+  background-image: url("assets/background-marmol.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 100%;
+  padding-top: 2.5rem;
+  padding-bottom: 3.5rem;
+}
+.services-hero-title {
+  font-family: "Playfair Display", serif;
+  font-weight: 600;
+  font-size: 2.4rem;
+  letter-spacing: 0.5px;
+  color: var(--gold-dark);
+}
+.services-hero-sub {
+  font-size: 1.05rem;
+  color: var(--text-color);
+  opacity: 0.85;
+}
+.services-highlight {
+  background: var(--gold);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 0.9rem 1.6rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+.services-highlight:hover,
+.services-highlight:focus {
+  background: var(--gold-dark);
+  color: #fff;
+}
+
+.services-grid {
+  display: grid;
+  gap: 1.75rem;
+  margin-top: 2.5rem;
+}
+/* Layout: en pantallas grandes 4 columnas para permitir patrón imagen / texto */
+@media (min-width: 992px) {
+  .services-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+@media (max-width: 991.98px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.service-card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+.service-card.media-left,
+.service-card.media-right {
+  flex-direction: row;
+}
+@media (max-width: 991.98px) {
+  .service-card.media-left,
+  .service-card.media-right {
+    flex-direction: column;
+  }
+}
+.service-media {
+  flex: 1;
+  min-height: 160px;
+  background: #ddd center/cover no-repeat;
+}
+.service-body {
+  flex: 1;
+  padding: 1.25rem 1.25rem 1.35rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.service-body h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 0 0 0.6rem;
+  color: var(--text-color);
+}
+.service-body p {
+  font-size: 0.85rem;
+  line-height: 1.35;
+  margin: 0;
+  color: var(--text-color);
+  opacity: 0.85;
+}
+.service-icon {
+  font-size: 2rem;
+  line-height: 1;
+  margin-bottom: 0.75rem;
+  color: var(--gold-dark);
+}
+
+/* Grid item spanning rules to replicate alternancia (imagen / bloque texto) */
+@media (min-width: 992px) {
+  .span-2 {
+    grid-column: span 2;
+  }
+}
+
+/* Mini feature bar inferior */
+.services-mini-bar {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 2.75rem;
+}
+@media (min-width: 768px) {
+  .services-mini-bar {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+@media (max-width: 767.98px) {
+  .services-mini-bar {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+.mini-feature {
+  background: #fff;
+  border: 2px solid var(--gold);
+  border-radius: 10px;
+  padding: 1.1rem 0.9rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.45rem;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
+  transition: 0.25s ease;
+}
+.mini-feature span {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--text-color);
+}
+.mini-feature .mf-icon {
+  font-size: 1.4rem;
+}
+.mini-feature:hover,
+.mini-feature:focus {
+  background: var(--gold);
+  color: #fff;
+  text-decoration: none;
+  border-color: var(--gold-dark);
+}
+
+/* Accesibilidad foco */
+.services-wrapper .mini-feature:focus {
+  outline: 3px solid var(--gold-dark);
+  outline-offset: 3px;
 }

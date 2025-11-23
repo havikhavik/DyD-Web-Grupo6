@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es" class="h-100">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Servicios – Aurora Plaza</title>
+	<meta name="description" content="Descubre los servicios de Aurora Plaza: estacionamiento premium, Wi-Fi gratuito, áreas de juego infantil y guardarropa/lockers." />
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+	<link rel="stylesheet" href="style.css" />
+</head>
+<body class="d-flex flex-column min-vh-100">
+	<header>
+		<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm" aria-label="Navegación principal">
+			<div class="container-xl py-2">
+				<a class="navbar-brand d-flex align-items-center gap-2" href="index.html#inicio" aria-label="Aurora Plaza inicio">
+					<img src="assets/img/logo.svg" alt="Logo Aurora Plaza" width="36" height="36" onerror="this.style.display='none'">
+					<span class="fw-semibold brand-text">AURORA PLAZA</span>
+				</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Mostrar menú">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="mainNav">
+					<ul class="navbar-nav ms-auto mb-2 mb-lg-0" role="list">
+						<li class="nav-item"><a class="nav-link" href="index.html#inicio">Inicio</a></li>
+						<li class="nav-item"><a class="nav-link active" href="servicios.html" aria-current="page">Servicios</a></li>
+						<li class="nav-item"><a class="nav-link" href="entretenimiento.html">Entretenimiento</a></li>
+						<li class="nav-item"><a class="nav-link" href="locales.html">Locales</a></li>
+						<li class="nav-item"><a class="nav-link" href="ofertas.html">Ofertas</a></li>
+						<li class="nav-item"><a class="nav-link" href="gastronomia.html">Gastronomía</a></li>
+						<li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
+
+	<main class="flex-grow-1 services-wrapper" id="contenido-servicios" aria-labelledby="titulo-servicios">
+		<div class="container">
+			<header class="text-center mb-4">
+				<h1 id="titulo-servicios" class="services-hero-title">Nuestros Servicios</h1>
+				<p class="services-hero-sub mb-3">Comodidad en Cada Detalle</p>
+				<button type="button" class="services-highlight" aria-label="Solicitar información de servicios">Solicitar Información</button>
+				<p class="mt-4 fw-semibold">Explora Nuestros Servicios</p>
+			</header>
+
+			<!-- Grid principal de servicios -->
+			<div class="services-grid" aria-label="Listado de servicios principales" role="list">
+				<!-- Estacionamiento Premium -->
+				<article class="service-card media-left span-2" role="listitem">
+					<div class="service-media" style="background-image:url('assets/service-parking.png');" aria-label="Sector de estacionamiento premium con vehículos"></div>
+					<div class="service-body">
+						<div class="service-icon" aria-hidden="true">🚗</div>
+						<h3>Estacionamiento Premium</h3>
+						<p>Amplios espacios vigilados, señalización clara y acceso rápido a los niveles principales para una llegada sin estrés.</p>
+					</div>
+				</article>
+
+				<!-- Wi-Fi Gratuito -->
+				<article class="service-card media-right span-2" role="listitem">
+					<div class="service-media" style="background-image:url('assets/service-wifi.png');" aria-label="Zona de descanso con persona usando portátil"></div>
+					<div class="service-body">
+						<div class="service-icon" aria-hidden="true">📶</div>
+						<h3>Wi‑Fi Gratuito</h3>
+						<p>Conéctate sin límites en todo el centro comercial. Red estable y segura para mantenerte siempre en línea.</p>
+					</div>
+				</article>
+
+				<!-- Áreas de Juego Infantil (Kids Zone) -->
+				<article class="service-card media-left span-2" role="listitem">
+					<div class="service-media" style="background-image:url('assets/service-playground.jpg');" aria-label="Área de juego infantil con actividades educativas"></div>
+					<div class="service-body">
+						<div class="service-icon" aria-hidden="true">🎈</div>
+						<h3>Áreas de Juego Infantil (Kids Zone)</h3>
+						<p>Espacios seguros y didácticos pensados para el entretenimiento de los más pequeños mientras disfrutas tu visita.</p>
+					</div>
+				</article>
+
+				<!-- Guardarropa / Lockers -->
+				<article class="service-card media-right span-2" role="listitem">
+					<div class="service-media" style="background-image:url('assets/service-lockers.jpg');" aria-label="Fila de lockers del guardarropa"></div>
+					<div class="service-body">
+						<div class="service-icon" aria-hidden="true">🔐</div>
+						<h3>Guardarropa / Lockers</h3>
+						<p>Resguarda tus pertenencias con tranquilidad. Lockers modernos, limpios y de fácil acceso durante toda tu estadía.</p>
+					</div>
+				</article>
+			</div>
+
+			<!-- Barra de acciones rápidas (reutilización de features) -->
+			<div class="services-mini-bar" aria-label="Acciones rápidas" role="list">
+				<a href="locales.html" class="mini-feature" role="listitem" aria-label="Encontrar tienda">
+					<div class="mf-icon" aria-hidden="true">🛍️</div>
+					<span>Encontrar tienda</span>
+				</a>
+				<a href="ofertas.html" class="mini-feature" role="listitem" aria-label="Descubrir ofertas">
+					<div class="mf-icon" aria-hidden="true">⭐</div>
+					<span>Descubrir ofertas</span>
+				</a>
+				<a href="gastronomia.html" class="mini-feature" role="listitem" aria-label="Reservar mesas">
+					<div class="mf-icon" aria-hidden="true">🍽️</div>
+					<span>Reservar mesas</span>
+				</a>
+				<a href="contacto.html" class="mini-feature" role="listitem" aria-label="Atención al cliente">
+					<div class="mf-icon" aria-hidden="true">💬</div>
+					<span>Atención al cliente</span>
+				</a>
+			</div>
+		</div>
+	</main>
+
+	<footer class="mt-auto py-4 bg-white border-top" aria-label="Pie de página">
+		<div class="container d-flex flex-column flex-md-row justify-content-between gap-3">
+			<p class="mb-0 small">© <span id="anio"></span> Aurora Plaza. Todos los derechos reservados.</p>
+			<nav aria-label="Enlaces legales">
+				<ul class="list-inline mb-0" role="list">
+					<li class="list-inline-item"><a href="privacidad.html" class="link-secondary">Privacidad</a></li>
+					<li class="list-inline-item"><a href="terminos.html" class="link-secondary">Términos</a></li>
+					<li class="list-inline-item"><a href="accesibilidad.html" class="link-secondary">Accesibilidad</a></li>
+				</ul>
+			</nav>
+		</div>
+	</footer>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+	<script>
+		document.getElementById('anio').textContent = new Date().getFullYear();
+		const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		if(!reduceMotion){
+			document.querySelector('.services-wrapper header').classList.add('fade-in');
+		}
+	</script>
+</body>
+</html>
