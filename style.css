@@ -19,14 +19,20 @@ body {
   letter-spacing: 0.5px;
   font-size: 2.05rem;
 }
+
+/* --- Estilos de Navegación --- */
+.nav-item {
+  margin: 0 0.5rem; /* Añade un margen horizontal para separar los elementos */
+}
+
 .nav-link {
   font-weight: 500;
-}
-.nav-link.active {
-  color: var(--gold) !important;
   position: relative;
+  transition: color 0.3s ease;
+  padding: 0.5rem 0; /* Ajusta el padding para que la línea no se corte */
 }
-.nav-link.active::after {
+
+.nav-link::after {
   content: "";
   position: absolute;
   left: 0;
@@ -35,6 +41,20 @@ body {
   height: 2px;
   background: var(--gold);
   border-radius: 2px;
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.3s ease-out;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+.nav-link.active,
+.nav-link:hover {
+  color: var(--gold) !important;
 }
 
 /* Hero */
@@ -270,6 +290,11 @@ footer {
   flex-direction: column;
   overflow: hidden;
   position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
 .service-card.media-left,
 .service-card.media-right {
@@ -371,4 +396,444 @@ footer {
 .services-wrapper .mini-feature:focus {
   outline: 3px solid var(--gold-dark);
   outline-offset: 3px;
+}
+
+/* ---------------- Estilos de Paginación ---------------- */
+.pagination .page-link {
+    color: var(--gold);
+    border-color: var(--gold);
+}
+
+.pagination .page-link:hover {
+    background-color: var(--gold-dark);
+    color: #fff;
+    border-color: var(--gold-dark);
+}
+
+.pagination .page-item.active .page-link {
+    background-color: var(--gold);
+    border-color: var(--gold);
+    color: #fff;
+}
+
+.pagination .page-item.disabled .page-link {
+    color: #6c757d;
+    background-color: #fff;
+    border-color: #dee2e6;
+}
+
+/* --- Variables y Configuración General --- */
+:root {
+  --color-gold-entr: #C5A059;
+  --color-gold-dark-entr: #a68545;
+  --color-dark-entr: #1a1a1a;
+  --color-gray-light-entr: #f8f9fa;
+}
+
+.text-gold-entr {
+  color: var(--color-gold-entr);
+}
+
+.bg-light-pattern-entr {
+  background-color: #fafafa;
+}
+
+/* --- Hero Section --- */
+.hero-section-entr {
+  position: relative;
+  background-image: url('assets/fondo-shop.png');
+  background-color: #333;
+  background-size: cover;
+  background-position: center;
+  background-attachment: scroll;
+  min-height: 60vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-overlay-entr {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1;
+}
+
+.hero-section-entr .container {
+  position: relative;
+  z-index: 2;
+  color: white;
+  text-align: center;
+}
+
+.hero-title-entr {
+  font-weight: 700;
+  text-shadow: none;
+}
+
+.hero-subtitle-entr {
+  font-weight: 300;
+  opacity: 0.9;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Botones Personalizados */
+.btn-primary-entr {
+  background-color: var(--color-gold-entr);
+  border-color: var(--color-gold-entr);
+  color: white;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-primary-entr:hover {
+  background-color: var(--color-gold-dark-entr);
+  border-color: var(--color-gold-dark-entr);
+  transform: translateY(-2px);
+}
+
+/* --- Filtros --- */
+.btn-filter-entr {
+  border: 1px solid #e0e0e0;
+  background: white;
+  color: #666;
+  border-radius: 50px;
+  padding: 0.5rem 1.5rem;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.btn-filter-entr:hover {
+  background-color: #f0f0f0;
+  color: var(--color-dark-entr);
+}
+
+.btn-filter-entr.active {
+  background-color: var(--color-gold-entr);
+  color: white;
+  border-color: var(--color-gold-entr);
+  box-shadow: 0 4px 10px rgba(197, 160, 89, 0.3);
+}
+
+/* --- Tarjetas de Entretenimiento (Cards) --- */
+.entertainment-card-entr {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  background-color: white;
+}
+
+.entertainment-card-entr:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
+}
+
+.card-img-wrapper-entr {
+  position: relative;
+  overflow: hidden;
+  height: 250px;
+}
+
+.card-img-top-entr {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.entertainment-card-entr:hover .card-img-top-entr {
+  transform: scale(1.05);
+}
+
+/* Overlay en hover de la tarjeta */
+.card-overlay-entr {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.entertainment-card-entr:hover .card-overlay-entr {
+  opacity: 1;
+}
+
+.link-gold-entr {
+  color: var(--color-gold-entr);
+  transition: color 0.2s;
+}
+
+.link-gold-entr:hover {
+  color: var(--color-gold-dark-entr);
+}
+
+.letter-spacing-entr {
+  letter-spacing: 1px;
+}
+
+/* --- Modal --- */
+.modal-body-scrollable-entr {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+/* --- Utilidades --- */
+.cta-section-entr {
+  background-color: white;
+  border-top: 1px solid #eaeaea;
+}
+
+/* Animación de entrada para los items del grid */
+@keyframes fadeInUp-entr {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 20px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.fade-in-up-entr {
+  animation: fadeInUp-entr 0.5s ease-out forwards;
+}
+
+/* --- Variables y Configuración General --- */
+:root {
+  --color-gold-gastro: #C5A059;
+  --color-gold-dark-gastro: #a68545;
+  --color-dark-gastro: #1a1a1a;
+  --color-gray-light-gastro: #f8f9fa;
+}
+
+.text-gold-gastro {
+  color: var(--color-gold-gastro);
+}
+
+.bg-light-pattern-gastro {
+  background-color: #fafafa;
+}
+
+/* --- Hero Section --- */
+.hero-section-gastro {
+  position: relative;
+  background-image: url('assets/patio-comidas.png');
+  background-color: #333;
+  background-size: cover;
+  background-position: center;
+  background-attachment: scroll;
+  min-height: 60vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-overlay-gastro {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1;
+}
+
+.hero-section-gastro .container {
+  position: relative;
+  z-index: 2;
+  color: white;
+  text-align: center;
+}
+
+.hero-title-gastro {
+  font-weight: 700;
+  text-shadow: none;
+}
+
+.hero-subtitle-gastro {
+  font-weight: 300;
+  opacity: 0.9;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* --- Reviews Section --- */
+.reviews-section-gastro {
+  background-color: var(--color-gray-light-gastro);
+}
+
+.review-card {
+  max-width: 700px;
+  margin: auto;
+}
+
+.review-text {
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.review-author {
+  color: var(--color-gold-gastro);
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: invert(1);
+}
+
+/* --- Separator --- */
+.separator-gastro {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: var(--color-gold-gastro);
+}
+
+.separator-gastro::before,
+.separator-gastro::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid var(--color-gold-gastro);
+  opacity: 0.5;
+}
+
+.separator-gastro:not(:empty)::before {
+  margin-right: .5em;
+}
+
+.separator-gastro:not(:empty)::after {
+  margin-left: .5em;
+}
+
+/* Botones Personalizados */
+.btn-primary-gastro {
+  background-color: var(--color-gold-gastro);
+  border-color: var(--color-gold-gastro);
+  color: white;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-primary-gastro:hover {
+  background-color: var(--color-gold-dark-gastro);
+  border-color: var(--color-gold-dark-gastro);
+  transform: translateY(-2px);
+}
+
+/* --- Filtros --- */
+.btn-filter-gastro {
+  border: 1px solid #e0e0e0;
+  background: white;
+  color: #666;
+  border-radius: 50px;
+  padding: 0.5rem 1.5rem;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.btn-filter-gastro:hover {
+  background-color: #f0f0f0;
+  color: var(--color-dark-gastro);
+}
+
+.btn-filter-gastro.active {
+  background-color: var(--color-gold-gastro);
+  color: white;
+  border-color: var(--color-gold-gastro);
+  box-shadow: 0 4px 10px rgba(197, 160, 89, 0.3);
+}
+
+/* --- Tarjetas de Gastronomía (Cards) --- */
+.gastronomia-card-gastro {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  background-color: white;
+}
+
+.gastronomia-card-gastro:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
+}
+
+.card-img-wrapper-gastro {
+  position: relative;
+  overflow: hidden;
+  height: 250px;
+}
+
+.card-img-top-gastro {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.gastronomia-card-gastro:hover .card-img-top-gastro {
+  transform: scale(1.05);
+}
+
+/* Overlay en hover de la tarjeta */
+.card-overlay-gastro {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.gastronomia-card-gastro:hover .card-overlay-gastro {
+  opacity: 1;
+}
+
+.link-gold-gastro {
+  color: var(--color-gold-gastro);
+  transition: color 0.2s;
+}
+
+.link-gold-gastro:hover {
+  color: var(--color-gold-dark-gastro);
+}
+
+.letter-spacing-gastro {
+  letter-spacing: 1px;
+}
+
+/* --- Modal --- */
+.modal-body-scrollable-gastro {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+/* Animación de entrada para los items del grid */
+@keyframes fadeInUp-gastro {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 20px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.fade-in-up-gastro {
+  animation: fadeInUp-gastro 0.5s ease-out forwards;
 }

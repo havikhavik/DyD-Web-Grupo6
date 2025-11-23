@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="es" class="h-100">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Gastronomía – Aurora Plaza</title>
+    <meta name="description" content="Explora la exquisita oferta gastronómica de Aurora Plaza. Restaurantes, cafés y más." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body class="d-flex flex-column min-vh-100">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm" aria-label="Navegación principal">
+            <div class="container-xl py-2">
+                <a class="navbar-brand d-flex align-items-center gap-2" href="index.html" aria-label="Aurora Plaza inicio">
+                    <img src="assets/img/logo.svg" alt="Logo Aurora Plaza" width="36" height="36" onerror="this.style.display='none'">
+                    <span class="fw-semibold brand-text">AURORA PLAZA</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Mostrar menú">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="mainNav">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0" role="list">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+                        <li class="nav-item"><a class="nav-link" href="servicios.html">Servicios</a></li>
+                        <li class="nav-item"><a class="nav-link" href="entretenimiento.html">Entretenimiento</a></li>
+                        <li class="nav-item"><a class="nav-link" href="locales.html">Locales</a></li>
+                        <li class="nav-item"><a class="nav-link" href="ofertas.html">Ofertas</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="gastronomia.html" aria-current="page">Gastronomía</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="flex-grow-1">
+        <section class="hero-section-gastro">
+            <div class="hero-overlay-gastro"></div>
+            <div class="container">
+                <h1 class="hero-title-gastro display-4">Un Festín para tus Sentidos</h1>
+                <p class="hero-subtitle-gastro lead">
+                    Descubre un universo de sabores que te esperan en cada rincón de nuestra galería.
+                </p>
+            </div>
+        </section>
+
+        <section class="py-5 bg-light-pattern-gastro">
+            <div class="container">
+                <div id="filters" class="text-center mb-5">
+                    <button class="btn btn-filter-gastro active" data-filter="todos">Todos</button>
+                    <button class="btn btn-filter-gastro" data-filter="restaurante">Restaurantes</button>
+                    <button class="btn btn-filter-gastro" data-filter="cafe">Cafeterías</button>
+                    <button class="btn btn-filter-gastro" data-filter="rapida">Comida Rápida</button>
+                </div>
+
+                <div id="gastronomia-grid" class="row g-4">
+                </div>
+
+                <nav aria-label="Paginación de gastronomía" class="mt-5">
+                    <ul id="pagination" class="pagination justify-content-center">
+                    </ul>
+                </nav>
+            </div>
+        </section>
+
+        <div class="container my-5">
+            <div class="separator-gastro">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-egg-fried" viewBox="0 0 16 16">
+                    <path d="M8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                    <path d="M13.997 5.17a5 5 0 0 0-8.101-4.09A5 5 0 0 0 1.28 9.342a5 5 0 0 0 8.336 5.109 5 5 0 0 0 5.4-3.471c-.24-.11-2.2-1.072-2.2-2.504 0-1.102.5-1.831 1.07-2.322z"/>
+                </svg>
+            </div>
+        </div>
+
+        <section class="py-5 reviews-section-gastro">
+            <div class="container">
+                <h2 class="text-center mb-5">Opiniones de Nuestros Visitantes</h2>
+                <div id="reviewsCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="review-card text-center">
+                                <p class="review-text fst-italic">"¡La variedad de restaurantes es increíble! La Trattoria se convirtió en mi lugar favorito para una cena especial."</p>
+                                <p class="review-author fw-bold mb-0">Ana Pérez</p>
+                                <div class="review-stars text-warning">
+                                    ★★★★★
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="review-card text-center">
+                                <p class="review-text fst-italic">"El ambiente del Café del Sol es perfecto para trabajar o relajarse. El café es de primera calidad."</p>
+                                <p class="review-author fw-bold mb-0">Carlos Gómez</p>
+                                <div class="review-stars text-warning">
+                                    ★★★★★
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="review-card text-center">
+                                <p class="review-text fst-italic">"Ideal para una salida rápida. Burger Palace nunca decepciona. ¡Volveremos por las malteadas!"</p>
+                                <p class="review-author fw-bold mb-0">Laura Martínez</p>
+                                <div class="review-stars text-warning">
+                                    ★★★★☆
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#reviewsCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Anterior</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#reviewsCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Siguiente</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="modal fade" id="reservaModal" tabindex="-1" aria-labelledby="reservaModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="reservaModalLabel">Hacer una Reserva</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <h6 id="modal-restaurante-title" class="mb-3"></h6>
+                    <p>Selecciona un horario disponible:</p>
+                    <select id="horarios-select" class="form-select"></select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" id="confirmar-reserva-btn" class="btn btn-primary-gastro">Confirmar Reserva</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="reserva-toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <svg class="rounded me-2" width="20" height="20" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#007aff"></rect></svg>
+                <strong class="me-auto">Aurora Plaza</strong>
+                <small>Ahora mismo</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Cerrar"></button>
+            </div>
+            <div id="toast-body-content" class="toast-body">
+            </div>
+        </div>
+    </div>
+
+    <footer class="mt-auto py-4 bg-white border-top" aria-label="Pie de página">
+		<div class="container d-flex flex-column flex-md-row justify-content-between gap-3">
+			<p class="mb-0 small">© <span id="anio"></span> Aurora Plaza. Todos los derechos reservados.</p>
+			<nav aria-label="Enlaces legales">
+				<ul class="list-inline mb-0" role="list">
+					<li class="list-inline-item"><a href="#privacidad" class="link-secondary">Privacidad</a></li>
+					<li class="list-inline-item"><a href="#terminos" class="link-secondary">Términos</a></li>
+					<li class="list-inline-item"><a href="#accesibilidad" class="link-secondary">Accesibilidad</a></li>
+				</ul>
+			</nav>
+		</div>
+	</footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script>
+        document.getElementById('anio').textContent = new Date().getFullYear();
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const allItems = [
+                { title: 'El Sabor del Norte', description: 'Auténtica comida norteña en un ambiente rústico.', image: 'assets/norte-arg.png', alt: 'Restaurante elegante', category: 'restaurante' },
+                { title: 'La Trattoria', description: 'Pasta casera y pizzas a la leña en un ambiente italiano.', image: 'assets/trattoria.png', alt: 'Plato de pasta', category: 'restaurante' },
+                { title: 'Café del Sol', description: 'Café de especialidad y pastelería artesanal.', image: 'assets/cafe-del-sol.png', alt: 'Taza de café', category: 'cafe' },
+                { title: 'Burger Palace', description: 'Las mejores hamburguesas y malteadas de la ciudad.', image: 'assets/burger-palace.png', alt: 'Hamburguesa', category: 'rapida' },
+                { title: 'Sushi Zen', description: 'Fusión de sushi tradicional y creaciones modernas.', image: 'assets/sushi-zen.png', alt: 'Plato de sushi', category: 'restaurante' },
+                { title: 'Aroma & Grano', description: 'Un espacio para relajarse con un buen libro y un café.', image: 'assets/aroma-&-grano.png', alt: 'Interior de cafetería', category: 'cafe' },
+            ];
+
+            let currentFilter = 'todos';
+            let currentPage = 1;
+            const itemsPerPage = 6;
+            let currentRestaurantTitle = '';
+
+            const grid = document.getElementById('gastronomia-grid');
+            const pagination = document.getElementById('pagination');
+            const filters = document.getElementById('filters');
+            const reservaModal = new bootstrap.Modal(document.getElementById('reservaModal'));
+            const modalTitle = document.getElementById('modal-restaurante-title');
+            const horariosSelect = document.getElementById('horarios-select');
+            const confirmarReservaBtn = document.getElementById('confirmar-reserva-btn');
+            const toastEl = document.getElementById('reserva-toast');
+            const reservaToast = new bootstrap.Toast(toastEl, { delay: 3000 });
+            const toastBody = document.getElementById('toast-body-content');
+
+            function generateHorarios(category) {
+                horariosSelect.innerHTML = '';
+                let horarios = [];
+
+                if (category === 'restaurante') {
+                    for (let h = 12; h < 15; h++) { horarios.push(`${h}:00`); horarios.push(`${h}:30`); }
+                    for (let h = 20; h < 23; h++) { horarios.push(`${h}:00`); horarios.push(`${h}:30`); }
+                } else if (category === 'cafe') {
+                    for (let h = 10; h < 20; h++) { horarios.push(`${h}:00`); horarios.push(`${h}:30`); }
+                } else {
+                    for (let h = 11; h < 23; h++) { horarios.push(`${h}:00`); horarios.push(`${h}:30`); }
+                    horarios.push("23:30");
+                }
+
+                horarios.forEach(hora => {
+                    const option = document.createElement('option');
+                    option.value = hora;
+                    option.textContent = `${hora} hs`;
+                    if (Math.random() > 0.8) {
+                        option.disabled = true;
+                        option.textContent += ' (Ocupado)';
+                    }
+                    horariosSelect.appendChild(option);
+                });
+            }
+
+            function displayItems() {
+                const filteredItems = currentFilter === 'todos' ? allItems : allItems.filter(item => item.category === currentFilter);
+                
+                grid.innerHTML = '';
+                const startIndex = (currentPage - 1) * itemsPerPage;
+                const endIndex = startIndex + itemsPerPage;
+                const paginatedItems = filteredItems.slice(startIndex, endIndex);
+
+                paginatedItems.forEach((item, index) => {
+                    const col = document.createElement('div');
+                    col.className = 'col-md-6 col-lg-4 fade-in-up-gastro';
+                    col.style.animationDelay = `${index * 0.1}s`;
+                    col.innerHTML = `
+                        <div class="card gastronomia-card-gastro h-100 shadow-sm border-0 rounded-3">
+                            <div class="card-img-wrapper-gastro">
+                                <img src="${item.image}" class="card-img-top-gastro" alt="${item.alt}">
+                                <div class="card-overlay-gastro">
+                                    <button class="btn btn-primary-gastro" data-item-title="${item.title}" data-item-category="${item.category}">Reservar</button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="h5 card-title">${item.title}</h3>
+                                <p class="card-text small">${item.description}</p>
+                            </div>
+                            <div class="card-footer bg-white border-0 pt-0 d-lg-none">
+                                <button class="link-gold-gastro text-uppercase small fw-bold letter-spacing-gastro" data-item-title="${item.title}" data-item-category="${item.category}">Reservar</button>
+                            </div>
+                        </div>
+                    `;
+                    grid.appendChild(col);
+                });
+            }
+
+            function setupPagination() {
+                const filteredItems = currentFilter === 'todos' ? allItems : allItems.filter(item => item.category === currentFilter);
+                const pageCount = Math.ceil(filteredItems.length / itemsPerPage);
+                pagination.innerHTML = '';
+
+                for (let i = 1; i <= pageCount; i++) {
+                    const li = document.createElement('li');
+                    li.className = 'page-item' + (i === currentPage ? ' active' : '');
+                    const a = document.createElement('a');
+                    a.className = 'page-link';
+                    a.href = '#';
+                    a.innerText = i;
+                    a.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        currentPage = i;
+                        displayItems();
+                        updatePaginationActiveState();
+                    });
+                    li.appendChild(a);
+                    pagination.appendChild(li);
+                }
+            }
+            
+            function updatePaginationActiveState() {
+                const pageItems = pagination.querySelectorAll('.page-item');
+                pageItems.forEach((item, index) => {
+                    item.classList.toggle('active', (index + 1) === currentPage);
+                });
+            }
+
+            filters.addEventListener('click', function(e) {
+                if (e.target.matches('.btn-filter-gastro')) {
+                    const filter = e.target.getAttribute('data-filter');
+                    if (filter !== currentFilter) {
+                        currentFilter = filter;
+                        currentPage = 1;
+                        
+                        filters.querySelector('.active').classList.remove('active');
+                        e.target.classList.add('active');
+                        
+                        displayItems();
+                        setupPagination();
+                    }
+                }
+            });
+
+            grid.addEventListener('click', function(e) {
+                if (e.target.matches('[data-item-title]')) {
+                    currentRestaurantTitle = e.target.getAttribute('data-item-title');
+                    const itemCategory = e.target.getAttribute('data-item-category');
+                    modalTitle.textContent = `Reserva en ${currentRestaurantTitle}`;
+                    generateHorarios(itemCategory);
+                    reservaModal.show();
+                }
+            });
+
+            confirmarReservaBtn.addEventListener('click', function() {
+                toastBody.textContent = `¡Tu reserva en ${currentRestaurantTitle} ha sido confirmada con éxito!`;
+                reservaModal.hide();
+                reservaToast.show();
+            });
+
+            displayItems();
+            setupPagination();
+        });
+    </script>
+</body>
+</html>
