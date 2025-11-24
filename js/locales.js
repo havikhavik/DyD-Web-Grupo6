@@ -1,4 +1,4 @@
-// Basic helpers and state
+
 document.getElementById('anio').textContent = new Date().getFullYear();
 const svgContainer = document.getElementById('svgContainer');
 const storeCards = document.getElementById('storeCards');
@@ -8,15 +8,14 @@ const coordsBubble = document.getElementById('coordsBubble');
 
 let scale = 1;
 function applyScale(){
-    // Prefer applying scale to the SVG element itself so HTML overlay markers (in .pins-overlay)
-    // remain in the container coordinate space and don't get double-scaled.
+
     const svg = svgContainer.querySelector('svg');
     if(svg){
         svg.style.transform = 'scale(' + scale + ')';
-        // use top-left origin so pixel positions used for overlays match
+
         svg.style.transformOrigin = '0 0';
     }else{
-        // fallback: if no svg yet, apply to container
+   
         svgContainer.style.transform = 'scale(' + scale + ')';
         svgContainer.style.transformOrigin = '50% 50%';
     }
@@ -24,16 +23,16 @@ function applyScale(){
 document.getElementById('zoomIn').addEventListener('click', ()=>{ scale = Math.min(2.4, scale + 0.15); applyScale(); });
 document.getElementById('zoomOut').addEventListener('click', ()=>{ scale = Math.max(0.6, scale - 0.15); applyScale(); });
 document.getElementById('resetZoom').addEventListener('click', ()=>{ scale = 1; applyScale(); });
-// Also bind the external floating controls (if present) to the same actions
+
 const zInOuter = document.getElementById('zoomInOuter'); if(zInOuter) zInOuter.addEventListener('click', ()=>{ scale = Math.min(2.4, scale + 0.15); applyScale(); });
 const zOutOuter = document.getElementById('zoomOutOuter'); if(zOutOuter) zOutOuter.addEventListener('click', ()=>{ scale = Math.max(0.6, scale - 0.15); applyScale(); });
 const zResetOuter = document.getElementById('resetZoomOuter'); if(zResetOuter) zResetOuter.addEventListener('click', ()=>{ scale = 1; applyScale(); });
 
-// Locations of the two SVGs
+
 const floors = { '1': 'mapa/planta_baja.svg', '2': 'mapa/piso_1.svg' };
 const currentFloor = { val: '1' };
 
-// External links to attach to some markers (assigned to the first few chosen markers)
+
 const externalLinks = [
     'https://pascual-lucas.github.io/dyd-web-tpo1-segunda-entrega/',
     'https://fmessina-uade.github.io/TPO-LocalComercial-RaizUrbana/productos.html',
@@ -41,26 +40,24 @@ const externalLinks = [
     'https://pedromarino99.github.io/OpticaVeoVeo/'
 ];
 
-// Manual mappings for specific chosen markers, keyed by floor then index.
-// Floor '1' -> Planta Baja, Floor '2' -> Primer Piso (as defined in `floors`)
+
 const manualMappings = {
     '1': { // Planta Baja — use PB codes for the five pins
-        '0': { name: 'PB 001' },
-        '1': { name: 'PB 002' },
-        '2': { name: 'PB 003' },
-        '3': { name: 'PB 004' },
-        '4': { name: 'PB 005' }
+        '0': { name: 'PB 001', externalUrl: 'https://ar.puma.com/'  },
+        '1': { name: 'PB 002', externalUrl: 'https://www.prune.com.ar/' },
+        '2': { name: 'PB 003', externalUrl: 'https://www.laspepas.com.ar/' },
+        '3': { name: 'PB 004', externalUrl: 'https://www.selu.com.ar/' },
+        '4': { name: 'PB 005', externalUrl: 'https://opiargentina.com/'}
     },
     '2': { // Primer Piso — use P1 codes for the five pins
         '0': { name: 'P1 101' },
         '1': { name: 'P1 102' },
         '2': { name: 'P1 103' },
-        '3': { name: 'P1 104' },
+        '3': { name: 'P1 104'},
         '4': { name: 'P1 105', externalUrl: 'https://valentinbrugnoliuade.github.io/Romi-Deco-Web/' }
     }
 };
 
-// Display name mappings (what appears as the main store name in cards/popups)
 const displayNameMappings = {
     '1': { // Planta Baja original names
         '0': 'PUMA',
@@ -78,13 +75,12 @@ const displayNameMappings = {
     }
 };
 
-// Code mappings to show in the smaller meta line and popup (PB / P1)
 const codeMappings = {
     '1': { '0':'PB 001','1':'PB 002','2':'PB 003','3':'PB 004','4':'PB 005' },
     '2': { '0':'P1 101','1':'P1 102','2':'P1 103','3':'P1 104','4':'P1 105' }
 };
 
-// storeMap: idx -> { area, pin, pinned, name, category, floor }
+
 const storeMap = {};
 
 async function loadFloor(f){
@@ -96,24 +92,23 @@ async function loadFloor(f){
     if(inlineTpl){
         try{
             const frag = inlineTpl.content ? inlineTpl.content.cloneNode(true) : document.importNode(inlineTpl, true);
-            // find svg inside fragment
+ 
             let svg = (frag.querySelector) ? frag.querySelector('svg') : (frag.getElementsByTagName ? frag.getElementsByTagName('svg')[0] : null);
             if(!svg){ svgContainer.innerHTML = '<div class="text-center text-muted">Mapa no disponible</div>'; return; }
-            // ensure sizing attributes
+
             svg.setAttribute('width', '100%'); svg.setAttribute('height', '100%'); svg.style.maxHeight = '100%';
-            // append the whole fragment (so defs/gradients remain available)
+     
             svgContainer.appendChild(frag);
-            // after appending, query the svg element (in case the fragment contained multiple nodes)
+
             const appendedSvg = svgContainer.querySelector('svg');
             processSVG(appendedSvg, f);
-            // ensure current zoom is applied to the new svg
+
             applyScale();
             return;
         }catch(err){ console.warn('Failed to load inline SVG template', err); }
     }
 
-    // Load the SVG for the requested floor (fetch from filesystem or server)
-    // Fallback: fetch the SVG (used when serving via http)
+
     try{
         const res = await fetch(floors[f]);
         const txt = await res.text();
@@ -133,7 +128,7 @@ async function loadFloorWithFallback(f){
     try{
         await loadFloor(f);
     }catch(e){
-        // If loadFloor failed unexpectedly, try object fallback
+ 
         console.warn('Primary SVG load failed, attempting <object> fallback', e);
         svgContainer.innerHTML = '';
         const obj = document.createElement('object');
@@ -141,7 +136,7 @@ async function loadFloorWithFallback(f){
         obj.data = floors[f];
         obj.style.width = '100%';
         obj.style.height = '100%';
-        // ensure object is visible while loading
+ 
         obj.innerHTML = '<div class="text-center text-muted">Cargando mapa...</div>';
         svgContainer.appendChild(obj);
         obj.addEventListener('load', ()=>{
@@ -158,7 +153,7 @@ async function loadFloorWithFallback(f){
                 applyScale();
             }catch(err){ console.error('Object fallback failed', err); svgContainer.innerHTML = '<div class="text-center text-muted">Error cargando plano</div>'; }
         });
-        // if object fails to load after some time, show message
+  
         setTimeout(()=>{
             const hasSvg = svgContainer.querySelector('svg');
             if(!hasSvg) svgContainer.innerHTML = '<div class="text-center text-muted">No se pudo cargar el plano (prueba con un servidor local)</div>';
@@ -167,16 +162,15 @@ async function loadFloorWithFallback(f){
 }
 
 function processSVG(svg, f){
-    // detect candidate shapes (rect, path, polygon) with non-zero area
+
     const candidates = Array.from(svg.querySelectorAll('rect,path,polygon,circle,ellipse')).filter(el => {
         try{ const bb = el.getBBox(); return bb.width*bb.height > 2000; }catch(e){ return false; }
     });
 
-    // clear existing floor entries for this floor
     Object.keys(storeMap).forEach(k=>{ if(storeMap[k].floor === String(f)) delete storeMap[k]; });
 
-    // choose a few well-distributed candidates for visible markers (avoid overlap)
-    const maxPins = 5; // number of markers per floor
+    
+    const maxPins = 5;
     function chooseDistributed(cands, maxN, svgEl){
         if(cands.length <= maxN) return cands.slice();
         const bbox = svgEl.getBBox();
@@ -201,42 +195,39 @@ function processSVG(svg, f){
                 if(best){ used.add(bestIdx); chosen.push(best); }
             }
         }
-        // If not enough chosen (due to sparse), fill remaining by picking first unused
+
         if(chosen.length < M){ cands.forEach((el, idx) => { if(used.has(idx)) return; if(chosen.length>=M) return; chosen.push(el); used.add(idx); }); }
         return chosen;
     }
 
     const chosenCandidates = chooseDistributed(candidates, maxPins, svg);
 
-    // create entries only for the chosen candidates; hide other areas and don't create sidebar cards for them
     chosenCandidates.forEach((el,i)=>{
-        const idx = String(i); // per-floor index
-        // keep the original element visible
+        const idx = String(i); 
+
         el.classList.add('store-area');
         el.setAttribute('data-idx', idx);
         el.setAttribute('data-name', el.getAttribute('id') || ('Local ' + (Number(idx)+1)));
         el.setAttribute('data-floor', String(f));
         el.setAttribute('data-category', el.getAttribute('data-category') || 'Otros');
 
-        // create an HTML marker inside an overlay so hover/click works consistently across browsers
         let overlay = svgContainer.querySelector('.pins-overlay');
         if(!overlay){ overlay = document.createElement('div'); overlay.className = 'pins-overlay'; svgContainer.appendChild(overlay); }
         const marker = document.createElement('button');
         marker.className = 'marker';
         marker.setAttribute('data-idx', idx);
-        // apply display name from displayNameMappings (keep original names visible)
+  
         const disp = (displayNameMappings[String(f)] && displayNameMappings[String(f)][String(i)]) || el.getAttribute('id') || ('Local ' + (Number(i)+1));
         el.setAttribute('data-name', disp);
-        // set code for meta/popup
+
         const code = (codeMappings[String(f)] && codeMappings[String(f)][String(i)]) || '';
         if(code) el.setAttribute('data-code', code);
 
-        // allow manual overrides (external link) per chosen index and floor
         const manual = (manualMappings[String(f)] && manualMappings[String(f)][String(i)]) || null;
         const storeExternal = (manual && manual.externalUrl) ? manual.externalUrl : (externalLinks[i] || '');
-        // store the external URL in storeMap (so modal can show it) but do NOT attach it to the marker for Planta Baja
+   
         if(String(f) !== '1' && storeExternal){ marker.setAttribute('data-external', storeExternal); }
-        // compute position using element bounding rect relative to svgContainer
+  
         try{
             const elRect = el.getBoundingClientRect();
             const parentRect = svgContainer.getBoundingClientRect();
@@ -254,26 +245,26 @@ function processSVG(svg, f){
     // Keep all SVG shapes visible so the full map is shown.
     if(!svgContainer.querySelector('.pins-overlay')){ const ov = document.createElement('div'); ov.className='pins-overlay'; svgContainer.appendChild(ov); }
 
-    // wire hover/tooltips/coord display
+
     svg.addEventListener('mousemove', (ev)=>{ coordsBubble.textContent = `X: ${ev.offsetX}, Y: ${ev.offsetY}`; });
 
-    // build UI lists/cards
+
     rebuildCards();
-    // restore any pinned state and reflect current filters
+
     loadPinnedState();
     applyFilter();
 }
 
 function rebuildCards(){
-    // categories
+
     const cats = new Set(Object.values(storeMap).map(s=>s.category || 'Otros'));
     categoryFilters.innerHTML = '';
     const allBtn = document.createElement('button'); allBtn.className='btn btn-sm btn-outline-secondary active'; allBtn.textContent='Todas'; allBtn.addEventListener('click', ()=>{ applyFilter(''); }); categoryFilters.appendChild(allBtn);
     cats.forEach(c=>{ const b=document.createElement('button'); b.className='btn btn-sm btn-outline-secondary'; b.textContent=c; b.addEventListener('click', ()=>{ applyFilter(c); }); categoryFilters.appendChild(b); });
 
-    // cards
+   
     storeCards.innerHTML = '';
-    // Only render cards for entries that exist in storeMap for current floor
+
     Object.keys(storeMap).filter(k=> storeMap[k].floor === currentFloor.val ).sort((a,b)=>Number(a)-Number(b)).forEach(idx=>{
         const s = storeMap[idx];
         const card = document.createElement('div'); card.className='store-card'; card.setAttribute('role','listitem');
@@ -308,8 +299,7 @@ function showStoreInfo(el){
     document.getElementById('storeDescription').textContent = 'Detalles del local ' + name + '.';
     document.getElementById('storeFloor').textContent = 'Piso: ' + (floor==='1' ? 'Planta Baja' : 'Primer Piso');
 
-    // populate link area in modal (if any). For Planta Baja pins we DO store the URL but do not assign it to the pin;
-    // show here when available.
+
     const linkContainer = document.getElementById('storeLinkContainer');
     if(linkContainer){
         linkContainer.innerHTML = '';
@@ -322,17 +312,16 @@ function showStoreInfo(el){
         }
     }
 
-    // logo images removed per user request (no logo shown in modal)
+
 
     const modalEl = document.getElementById('storeModal');
     const modal = new bootstrap.Modal(modalEl);
-    // hide map controls and pins overlay while modal is open to avoid overlay collisions
+
     const mapControls = document.querySelector('.map-controls');
     if(mapControls) mapControls.classList.add('d-none');
     const pinsOverlay = document.querySelector('.pins-overlay');
     if(pinsOverlay) pinsOverlay.classList.add('d-none');
 
-    // ensure controls and overlay are restored when modal closes
     const restoreControls = function(){ if(mapControls) mapControls.classList.remove('d-none'); if(pinsOverlay) pinsOverlay.classList.remove('d-none'); modalEl.removeEventListener('hidden.bs.modal', restoreControls); };
     modalEl.addEventListener('hidden.bs.modal', restoreControls);
 
@@ -381,11 +370,10 @@ function createPinForEntry(entry, idx){
     }catch(e){ return null; }
 }
 
-// Pin popup: small card shown near marker when clicked
 const pinPopup = document.getElementById('pinPopup');
 function showPinPopup(clientX, clientY, name, category, url){
     if(!pinPopup) return;
-    // 'category' parameter is reused to pass code (e.g. PB 001 / P1 101) when available
+  
     let html = `<div class="title">${name}</div><div class="cat">${category}</div>`;
     if(url){ html += `<div style="margin-top:8px"><a class="btn btn-sm btn-primary" href="${url}" target="_blank" rel="noopener">Ir al sitio</a></div>`; }
     pinPopup.innerHTML = html;
@@ -398,7 +386,7 @@ function showPinPopup(clientX, clientY, name, category, url){
     pinPopup.setAttribute('aria-hidden','false');
 }
 
-// hide popup when clicking outside or on scroll/zoom
+
 document.addEventListener('click', (e)=>{
     if(!pinPopup) return;
     if(pinPopup.contains(e.target)) return;
@@ -407,11 +395,10 @@ document.addEventListener('click', (e)=>{
 });
 
 
-// Floor tab handling
 document.querySelectorAll('.floor-tabs label').forEach(l=> l.addEventListener('click', ()=>{ const f = l.getAttribute('data-floor'); loadFloorWithFallback(f); }));
 
-// search input
+
 storeSearch.addEventListener('input', ()=> applyFilter());
 
-// initial load
 (async()=>{ await loadFloorWithFallback('1'); loadPinnedState(); applyFilter(); })();
+
