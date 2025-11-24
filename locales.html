@@ -31,7 +31,7 @@
             display:flex;
             flex-direction:column;
             gap:8px;
-            z-index:1200;
+            z-index: 800;
             background: rgba(255,255,255,0.94);
             padding:8px;
             border-radius:12px;
@@ -48,7 +48,7 @@
             display:flex;
             flex-direction:column;
             gap:8px;
-            z-index:1300;
+            z-index: 900;
             pointer-events: auto;
             background: rgba(255,255,255,0.92);
             padding:8px;
@@ -56,8 +56,8 @@
             box-shadow: 0 8px 18px rgba(0,0,0,0.08);
         }
         .map-controls-outer .btn { width:48px; height:48px; border-radius:8px; display:flex; align-items:center; justify-content:center; }
-        .coords-bubble { position:absolute; left:12px; bottom:12px; background:#262626;color:#fff;padding:6px 10px;border-radius:6px;font-size:.85rem; z-index:1200 }
-        /* pins (path inserted inside svg) */
+        .coords-bubble { position:absolute; left:12px; bottom:12px; background:#262626;color:#fff;padding:6px 10px;border-radius:6px;font-size:.85rem; z-index:800 }
+
      
         .store-pin { pointer-events:auto; transition:transform .15s ease,opacity .15s ease; transform-origin:center; }
         .store-pin.hidden { opacity:0; }
@@ -69,7 +69,7 @@
         .store-pin:hover .store-pin-img-normal { opacity: 0; }
         .store-pin:hover .store-pin-img-active { opacity: 1; }
         /* popup shown when clicking a marker */
-        .pin-popup { position:absolute; min-width:180px; max-width:260px; background:#fff; border-radius:12px; box-shadow:0 10px 30px rgba(0,0,0,0.12); padding:12px; z-index:1300; transform: translate(-50%, -110%); pointer-events:auto; }
+        .pin-popup { position:absolute; min-width:180px; max-width:260px; background:#fff; border-radius:12px; box-shadow:0 10px 30px rgba(0,0,0,0.12); padding:12px; z-index:1500; transform: translate(-50%, -110%); pointer-events:auto; }
         /* overlay for HTML markers placed over the SVG to ensure consistent pointer behavior */
         .pins-overlay { position:absolute; left:0; top:0; width:100%; height:100%; pointer-events:none; z-index:1250; }
         .marker { position:absolute; width:36px; height:48px; background-image: url('assets/marker.svg'); background-size: contain; background-repeat: no-repeat; background-position: center bottom; transform: translate(-50%, -100%); pointer-events: auto; cursor: pointer; transition: transform .16s ease, background-image .12s ease; border: none; padding: 0; background-color: transparent; outline: none; box-shadow: none; -webkit-appearance: none; appearance: none; }
@@ -377,6 +377,7 @@
 <rect x="968" y="601.5" width="39" height="7" transform="rotate(90 968 601.5)" fill="#F1D9E2" stroke="#FF94E0"/>
 </svg>
 </template>
+
 
 
 
