@@ -147,14 +147,14 @@
                                         <button id="resetZoom" class="btn btn-light">⤾</button>
                                     </div>
                                 </div>
-                                <!-- External floating controls (visible outside the map card) -->
+                    
                                 <div class="map-controls-outer" aria-hidden="false">
                                     <button id="zoomInOuter" class="btn btn-light">+</button>
                                     <button id="zoomOutOuter" class="btn btn-light">-</button>
                                     <button id="resetZoomOuter" class="btn btn-light">⤾</button>
                                 </div>
                                 <div class="coords-bubble" id="coordsBubble">X: -, Y: -</div>
-                                <!-- small popup for marker clicks -->
+
                                 <div id="pinPopup" class="pin-popup visually-hidden" aria-hidden="true"></div>
                             </div>
                         </div>
@@ -164,11 +164,10 @@
                         <div class="map-card p-3">
                             <div class="d-flex justify-content-between align-items-center mb-2">
                                 <h3 class="h6 mb-0">Locales</h3>
-                                <small class="text-muted">Filtrar y fijar</small>
                             </div>
                             <div id="category-filters" class="mb-3 d-flex flex-wrap gap-2"></div>
                             <div id="storeCards" class="store-cards" role="list">
-                                <!-- cards generated dynamically -->
+    
                             </div>
                         </div>
                     </aside>
@@ -183,7 +182,7 @@
         </div>
     </footer>
 
-    <!-- Modal -->
+    
     <div class="modal fade" id="storeModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -191,7 +190,7 @@
                             <div class="modal-body py-3">
                                 <p id="storeDescription" class="mb-2"></p>
                                 <p class="small text-muted mb-3" id="storeFloor"></p>
-                                <!-- link container injected by JS when available -->
+                 
                                 <div id="storeLinkContainer"></div>
                             </div>
                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button></div>
@@ -378,5 +377,6 @@
 <rect x="968" y="601.5" width="39" height="7" transform="rotate(90 968 601.5)" fill="#F1D9E2" stroke="#FF94E0"/>
 </svg>
 </template>
+
 
 
