@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="es" class="h-100">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ofertas – Aurora Plaza</title>
+    <meta name="description" content="Descubre las mejores ofertas y promociones en Aurora Plaza con descuentos exclusivos." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        /* Efectos de hover en tarjetas */
+        .oferta-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            border: none !important;
+        }
+
+        .oferta-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15) !important;
+        }
+
+        .oferta-card-inner {
+            position: relative;
+            height: 100%;
+        }
+
+        /* Imagen en lugar de fondo de color */
+        .oferta-image-wrapper {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+            background: none;
+        }
+
+        .oferta-image-wrapper img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .oferta-card:hover .oferta-image-wrapper img {
+            transform: scale(1.1) rotate(2deg);
+        }
+
+        /* Badge de descuento animado */
+        .badge-descuento {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(135deg, #ff6b6b, #ff8787) !important;
+            font-size: 1.2rem;
+            font-weight: 700;
+            padding: 10px 15px !important;
+            border-radius: 50%;
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+            animation: pulse-badge 2s infinite;
+            z-index: 10;
+        }
+
+        @keyframes pulse-badge {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        /* Overlay interactivo */
+        .oferta-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 5;
+        }
+
+        .oferta-card:hover .oferta-overlay {
+            opacity: 1;
+        }
+
+        .overlay-btn {
+            background: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .overlay-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .overlay-btn.info {
+            color: #007bff;
+        }
+
+        .overlay-btn.comprar {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        /* Body de tarjeta */
+        .oferta-body {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .oferta-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .oferta-card:hover .oferta-title {
+            color: #667eea;
+        }
+
+        .oferta-description {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 1rem;
+            flex: 1;
+        }
+
+        .oferta-vigencia {
+            font-size: 0.85rem;
+            color: #999;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .oferta-vigencia::before {
+            content: '⏰';
+        }
+
+
+        .filtros-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 3rem;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .btn-filter-ofertas {
+            background: white;
+            border: 2px solid #dee2e6;
+            color: #333;
+            padding: 10px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-filter-ofertas::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn-filter-ofertas:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-filter-ofertas:hover {
+            border-color: #667eea;
+            color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .btn-filter-ofertas.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Grid animada */
+        .ofertas-grid {
+            animation: fadeIn 0.6s ease;
+        }
+
+        .oferta-col {
+            animation: slideInUp 0.5s ease forwards;
+        }
+
+        .oferta-col:nth-child(1) { animation-delay: 0.1s; }
+        .oferta-col:nth-child(2) { animation-delay: 0.2s; }
+        .oferta-col:nth-child(3) { animation-delay: 0.3s; }
+        .oferta-col:nth-child(4) { animation-delay: 0.4s; }
+        .oferta-col:nth-child(5) { animation-delay: 0.5s; }
+        .oferta-col:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .modal-content {
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .oferta-detail-icon {
+            font-size: 2rem;
+            margin-right: 0.5rem;
+        }
+
+        .pagination {
+            gap: 0.5rem;
+        }
+
+        .page-link {
+            border: 2px solid #dee2e6;
+            color: #667eea;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .page-link:hover {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .page-item.active .page-link {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-color: transparent;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+    
+        .toast {
+            border-radius: 10px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            border: none;
+        }
+
+        .toast-header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+        }
+
+        /* Indicador de carga */
+        .loading-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #667eea;
+            border-radius: 50%;
+            animation: bounce 1.4s infinite;
+        }
+
+        .loading-indicator:nth-child(1) { animation-delay: 0s; }
+        .loading-indicator:nth-child(2) { animation-delay: 0.2s; }
+        .loading-indicator:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body class="d-flex flex-column min-vh-100">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm" aria-label="Navegación principal">
+            <div class="container-xl py-2">
+                <a class="navbar-brand d-flex align-items-center gap-2" href="index.html" aria-label="Aurora Plaza inicio">
+                    <img src="assets/img/logo.svg" alt="Logo Aurora Plaza" width="36" height="36" onerror="this.style.display='none'">
+                    <span class="fw-semibold brand-text">AURORA PLAZA</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Mostrar menú">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="mainNav">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0" role="list">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+                        <li class="nav-item"><a class="nav-link" href="servicios.html">Servicios</a></li>
+                        <li class="nav-item"><a class="nav-link" href="entretenimiento.html">Entretenimiento</a></li>
+                        <li class="nav-item"><a class="nav-link" href="locales.html">Locales</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="ofertas.html" aria-current="page">Ofertas</a></li>
+                        <li class="nav-item"><a class="nav-link" href="gastronomia.html">Gastronomía</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="flex-grow-1">
+        <section class="hero-section-ofertas">
+            <div class="hero-overlay-ofertas"></div>
+            <div class="container">
+                <h1 class="hero-title-ofertas display-4">Promociones Exclusivas</h1>
+                <p class="hero-subtitle-ofertas lead">
+                    Aprovecha nuestras mejores ofertas y descuentos en toda la galería.
+                </p>
+            </div>
+        </section>
+
+        <section class="py-5 bg-light">
+            <div class="container">
+                <!-- FILTROS -->
+                <div class="filtros-container" id="filters-ofertas">
+                    <button class="btn-filter-ofertas active" data-filter="todas">
+                        Todas las Ofertas
+                    </button>
+                    <button class="btn-filter-ofertas" data-filter="descuento">
+                        💰 Descuentos
+                    </button>
+                    <button class="btn-filter-ofertas" data-filter="promocion">
+                        🎁 Promociones
+                    </button>
+                    <button class="btn-filter-ofertas" data-filter="temporal">
+                        ⏰ Temporales
+                    </button>
+                </div>
+
+                <!-- GRID DE OFERTAS -->
+                <div class="row g-4 ofertas-grid" id="ofertas-grid"></div>
+
+                <!-- PAGINACIÓN -->
+                <nav aria-label="Paginación de ofertas" class="mt-5">
+                    <ul id="pagination-ofertas" class="pagination justify-content-center"></ul>
+                </nav>
+            </div>
+        </section>
+
+        <!-- SECCIÓN DE BENEFICIOS -->
+        <section class="py-5 bg-white">
+            <div class="container">
+                <h2 class="text-center mb-5">¿Por Qué Elegir Aurora Plaza?</h2>
+                <div class="row g-4">
+                    <div class="col-md-4 text-center">
+                        <div class="mb-3" style="font-size: 2.5rem;">🏷️</div>
+                        <h5>Mejores Precios</h5>
+                        <p class="text-muted">Descuentos exclusivos en toda la galería</p>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <div class="mb-3" style="font-size: 2.5rem;">⚡</div>
+                        <h5>Ofertas Actualizadas</h5>
+                        <p class="text-muted">Nuevas promociones cada semana</p>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <div class="mb-3" style="font-size: 2.5rem;">🎯</div>
+                        <h5>Ofertas Personalizadas</h5>
+                        <p class="text-muted">Descuentos según tus intereses</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- MODAL DE DETALLES -->
+    <div class="modal fade" id="detalleOfertaModal" tabindex="-1" aria-labelledby="detalleOfertaModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="detalleOfertaModalLabel">Detalle de Oferta</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <h3 id="modal-oferta-title" class="mb-3"></h3>
+                    <p id="modal-oferta-description" class="text-muted mb-3"></p>
+
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-6">
+                            <div class="bg-light p-3 rounded">
+                                <div>
+                                    <small class="text-muted">Descuento</small>
+                                    <p class="mb-0 fw-bold" id="modal-oferta-descuento"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="bg-light p-3 rounded">
+                                <div class="oferta-detail-icon">📅</div>
+                                <div>
+                                    <small class="text-muted">Válido hasta</small>
+                                    <p class="mb-0 fw-bold" id="modal-oferta-vigencia"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer border-top">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" id="aprovechar-oferta-btn" class="btn btn-primary">
+                        ✓ Aprovechar Oferta
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="codigoOfertaModal" tabindex="-1" aria-labelledby="codigoOfertaModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 id="codigoOfertaModalLabel" class="modal-title">Código de Oferta</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <p class="mb-2 text-muted" id="modal-codigo-desc">Muestra este código en la tienda antes de pagar.</p>
+                    <div class="p-3 bg-light rounded mb-3">
+                        <h3 id="modal-codigo" class="mb-0" style="letter-spacing:3px;font-weight:700;font-family:monospace;"></h3>
+                        <small id="modal-codigo-oferta" class="d-block text-muted mt-2"></small>
+                    </div>
+                    <div>
+                        <button id="copiar-codigo-btn" class="btn btn-outline-primary me-2">Copiar código</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="oferta-toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <svg class="rounded me-2" width="20" height="20" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#28a745"></rect></svg>
+                <strong class="me-auto">Aurora Plaza</strong>
+                <small>Ahora mismo</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Cerrar"></button>
+            </div>
+            <div id="toast-body-content" class="toast-body"></div>
+        </div>
+    </div>
+
+    <footer class="mt-auto py-4 bg-white border-top" aria-label="Pie de página">
+        <div class="container d-flex flex-column flex-md-row justify-content-between gap-3">
+            <p class="mb-0 small">© <span id="anio"></span> Aurora Plaza. Todos los derechos reservados.</p>
+            <nav aria-label="Enlaces legales">
+                <ul class="list-inline mb-0" role="list">
+                    <li class="list-inline-item"><a href="#privacidad" class="link-secondary">Privacidad</a></li>
+                    <li class="list-inline-item"><a href="#terminos" class="link-secondary">Términos</a></li>
+                    <li class="list-inline-item"><a href="#accesibilidad" class="link-secondary">Accesibilidad</a></li>
+                </ul>
+            </nav>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script>
+        document.getElementById('anio').textContent = new Date().getFullYear();
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const allOfertas = [
+                {
+                    title: 'Descuento 30%',
+                    description: 'En tiendas de moda seleccionadas.',
+                    descuento: '30%',
+                    vigencia: 'Hasta 30 de noviembre',
+                    image: 'assets/moda.jpg',   
+                    alt: 'Descuento en moda',
+                    category: 'descuento'
+                },
+                {
+                    title: 'Compra 2 Lleva 3',
+                    description: 'En accesorios y complementos.',
+                    descuento: '3x2',
+                    vigencia: 'Todo el mes',
+                    image: 'assets/accesorios.jpg',
+                    alt: 'Promoción de accesorios',
+                    category: 'promocion'
+                },
+                {
+                    title: 'Black Friday Anticipado',
+                    description: 'Descuentos hasta 50% en electrónica.',
+                    descuento: '50%',
+                    vigencia: 'Solo este fin de semana',
+                    image: 'assets/black-friday.png',
+                    alt: 'Descuentos electrónica',
+                    category: 'temporal'
+                }
+                // ... otras ofertas ...
+            ];
+
+            let currentFilter = 'todas';
+            let currentPage = 1;
+            const itemsPerPage = 6;
+            let currentOfertaData = {};
+
+            const grid = document.getElementById('ofertas-grid');
+            const pagination = document.getElementById('pagination-ofertas');
+            const filters = document.getElementById('filters-ofertas');
+            const detalleModal = new bootstrap.Modal(document.getElementById('detalleOfertaModal'));
+            const codigoModal = new bootstrap.Modal(document.getElementById('codigoOfertaModal'));
+            const modalCodigo = document.getElementById('modal-codigo');
+            const modalCodigoOferta = document.getElementById('modal-codigo-oferta');
+            const copiarCodigoBtn = document.getElementById('copiar-codigo-btn');
+            const modalTitle = document.getElementById('modal-oferta-title');
+            const modalDescription = document.getElementById('modal-oferta-description');
+            const modalDescuento = document.getElementById('modal-oferta-descuento');
+            const modalVigencia = document.getElementById('modal-oferta-vigencia');
+            const aprovecharBtn = document.getElementById('aprovechar-oferta-btn');
+            const toastEl = document.getElementById('oferta-toast');
+            const ofertaToast = new bootstrap.Toast(toastEl, { delay: 3000 });
+            const toastBody = document.getElementById('toast-body-content');
+
+            function displayItems() {
+                const filteredItems = currentFilter === 'todas' ? allOfertas : allOfertas.filter(item => item.category === currentFilter);
+
+                grid.innerHTML = '';
+
+                if (!filteredItems.length) {
+                    grid.innerHTML = '<div class="col-12 text-center text-muted">No hay ofertas disponibles.</div>';
+                    return;
+                }
+
+                const pageCount = Math.max(1, Math.ceil(filteredItems.length / itemsPerPage));
+                if (currentPage > pageCount) currentPage = 1;
+
+                const startIndex = (currentPage - 1) * itemsPerPage;
+                const endIndex = startIndex + itemsPerPage;
+                const paginatedItems = filteredItems.slice(startIndex, endIndex);
+
+                if (!paginatedItems.length && currentPage !== 1) {
+                    currentPage = 1;
+                    return displayItems();
+                }
+
+                paginatedItems.forEach((item) => {
+                    
+                    const mainImg = item.image || 'https://via.placeholder.com/300x200?text=Oferta';
+                    const col = document.createElement('div');
+                    col.className = 'col-md-6 col-lg-4 oferta-col';
+                    col.innerHTML = `
+                        <div class="card oferta-card h-100 shadow-sm">
+                            <div class="oferta-card-inner">
+                                <div class="oferta-image-wrapper">
+                                    <img src="${mainImg}" alt="${item.alt || ''}" loading="lazy" onerror="this.src='https://via.placeholder.com/300x200?text=Oferta'">
+                                    <span class="badge badge-descuento">${item.descuento}</span>
+                                    <div class="oferta-overlay">
+                                        <button class="overlay-btn info" data-oferta-index="${allOfertas.indexOf(item)}" onclick="mostrarDetalle(this)">
+                                            ℹ️ Detalles
+                                        </button>
+                                        <button class="overlay-btn comprar" data-oferta-index="${allOfertas.indexOf(item)}" onclick="mostrarCodigo(this)">
+                                            🏷️ Código
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="oferta-body">
+                                    <h3 class="oferta-title">${item.title}</h3>
+                                    <p class="oferta-description">${item.description}</p>
+                                    <div class="oferta-vigencia">${item.vigencia}</div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    grid.appendChild(col);
+                });
+            }
+
+            function setupPagination() {
+                const filteredItems = currentFilter === 'todas' ? allOfertas : allOfertas.filter(item => item.category === currentFilter);
+                const pageCount = Math.ceil(filteredItems.length / itemsPerPage) || 1;
+                currentPage = Math.max(1, Math.min(currentPage, pageCount));
+
+                pagination.innerHTML = '';
+
+                for (let i = 1; i <= pageCount; i++) {
+                    const li = document.createElement('li');
+                    li.className = 'page-item' + (i === currentPage ? ' active' : '');
+                    const a = document.createElement('a');
+                    a.className = 'page-link';
+                    a.href = '#';
+                    a.innerText = i;
+                    a.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        if (currentPage === i) return;
+                        currentPage = i;
+                        displayItems();
+                        updatePaginationActiveState();
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    });
+                    li.appendChild(a);
+                    pagination.appendChild(li);
+                }
+
+                updatePaginationActiveState();
+            }
+
+            function updatePaginationActiveState() {
+                const pageItems = pagination.querySelectorAll('.page-item');
+                pageItems.forEach((item, index) => {
+                    item.classList.toggle('active', (index + 1) === currentPage);
+                });
+            }
+
+            window.mostrarDetalle = function(btn) {
+                const index = btn.getAttribute('data-oferta-index');
+                currentOfertaData = allOfertas[index];
+                
+                modalTitle.textContent = currentOfertaData.title;
+                modalDescription.textContent = currentOfertaData.description;
+                modalDescuento.textContent = currentOfertaData.descuento;
+                modalVigencia.textContent = currentOfertaData.vigencia;
+                
+                detalleModal.show();
+            };
+
+
+            window.mostrarCodigo = function(btn) {
+                const index = btn.getAttribute('data-oferta-index');
+                const oferta = allOfertas[index];
+
+                // Código único simple: AUR-XXXXXX
+                const codigo = `AUR-${Math.random().toString(36).slice(2,8).toUpperCase()}`;
+
+                modalCodigo.textContent = codigo;
+                modalCodigoOferta.textContent = oferta.title;
+                codigoModal.show();
+
+            };
+            copiarCodigoBtn.addEventListener('click', function () {
+                const codigoText = modalCodigo.textContent;
+                if (!codigoText) return;
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(codigoText).then(() => {
+                        toastBody.textContent = 'Código copiado al portapapeles';
+                        ofertaToast.show();
+                    });
+                } else {
+                    // fallback
+                    const ta = document.createElement('textarea');
+                    ta.value = codigoText;
+                    document.body.appendChild(ta);
+                    ta.select();
+                    try {
+                        document.execCommand('copy');
+                        toastBody.textContent = 'Código copiado al portapapeles';
+                        ofertaToast.show();
+                    } catch (err) {
+                        toastBody.textContent = 'No se pudo copiar el código';
+                        ofertaToast.show();
+                    }
+                    ta.remove();
+                }
+            });
+
+
+            if (typeof window.agregarAlCarrito !== 'function') {
+                window.agregarAlCarrito = function(btn) {
+
+                    let mensaje = 'Acción no disponible.';
+                    try {
+                        const index = btn && btn.getAttribute ? btn.getAttribute('data-oferta-index') : null;
+                        if (index !== null && allOfertas && allOfertas[index]) {
+                            mensaje = `"${allOfertas[index].title}" — Esta oferta debe canjearse con código, no se agrega al carrito.`;
+                        }
+                    } catch (e) { /* noop */ }
+
+                    toastBody.innerHTML = `<strong>ℹ️</strong><br>${mensaje}`;
+                    ofertaToast.show();
+                };
+            }
+
+            filters.addEventListener('click', function(e) {
+                if (e.target.matches('.btn-filter-ofertas')) {
+                    const filter = e.target.getAttribute('data-filter');
+                    if (filter !== currentFilter) {
+                        currentFilter = filter;
+                        currentPage = 1;
+                        
+                        filters.querySelector('.active').classList.remove('active');
+                        e.target.classList.add('active');
+                        
+                        displayItems();
+                        setupPagination();
+                    }
+                }
+            });
+
+            setupPagination();
+            displayItems();
+            updatePaginationActiveState();
+        });
+    </script>
+</body>
+</html>
