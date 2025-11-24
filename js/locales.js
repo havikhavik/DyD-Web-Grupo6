@@ -19,6 +19,10 @@ function applyScale(){
         svgContainer.style.transform = 'scale(' + scale + ')';
         svgContainer.style.transformOrigin = '50% 50%';
     }
+     if (pinsOverlay) {
+        pinsOverlay.style.transform = transform;
+        pinsOverlay.style.transformOrigin = '0 0';
+    }
 }
 document.getElementById('zoomIn').addEventListener('click', ()=>{ scale = Math.min(2.4, scale + 0.15); applyScale(); });
 document.getElementById('zoomOut').addEventListener('click', ()=>{ scale = Math.max(0.6, scale - 0.15); applyScale(); });
@@ -401,4 +405,5 @@ document.querySelectorAll('.floor-tabs label').forEach(l=> l.addEventListener('c
 storeSearch.addEventListener('input', ()=> applyFilter());
 
 (async()=>{ await loadFloorWithFallback('1'); loadPinnedState(); applyFilter(); })();
+
 
